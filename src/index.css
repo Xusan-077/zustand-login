@@ -1,0 +1,9 @@
+@import "tailwindcss";
+@import "bootstrap-icons/font/bootstrap-icons.css";
+@import "react-datepicker/dist/react-datepicker.css";
+
+.container {
+    margin: 0 auto;
+    max-width: 1240px;
+    padding: 0 20px;
+}
