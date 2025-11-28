@@ -4,12 +4,14 @@ import Footer from "../components/Footer";
 
 export default function Layout() {
   return (
-    <>
-      <Header />
-      <main className="mb-10">
-        <Outlet />
-      </main>
+    <div className="min-h-screen flex flex-col justify-between">
+      <div className="">
+        <Header />
+        <main className="mb-10">
+          <Outlet />
+        </main>
+      </div>
       <Footer />
-    </>
+    </div>
   );
 }

@@ -1,5 +1,4 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
 
 const useAuthStore = create((set) => ({
   isAuth: false,
@@ -19,7 +18,8 @@ const useAuthStore = create((set) => ({
       isAuth: false,
       user: null,
     });
-    localStorage.clear();
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh_token");
   },
   updateUser: (user) => {
     set({

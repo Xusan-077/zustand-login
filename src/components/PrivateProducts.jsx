@@ -53,9 +53,11 @@ export default function PrivateProducts() {
     },
   });
 
-  console.log(createFAQ);
-
-  const { data: getFaqs, error: getFAQsError } = useQuery({
+  const {
+    data: getFaqs,
+    error: getFAQsError,
+    isLoading: isLoadingFAQs,
+  } = useQuery({
     queryKey: ["products"],
     queryFn: async function getAPI() {
       const res = await API.get("/faqs");
@@ -120,7 +122,28 @@ export default function PrivateProducts() {
           </div>
 
           <ul className="border border-gray-500 p-[30px_20px_10px_30px] rounded-lg">
-            {getFAQsError ? (
+            {isLoadingFAQs ? (
+              Array.from({ length: 3 }).map((el, index) => (
+                <div
+                  className="grid gap-25 items-center grid-cols-[50px_1fr_100px] mb-2.5 border-b pb-2.5 border-b-[#ccc]"
+                  key={index}
+                >
+                  <div className="bg-gray-200 rounded-lg h-[22.5px]"></div>
+                  <div className="grid grid-cols-4 gap-30 items-center">
+                    <div className="bg-gray-200 rounded-lg h-[22.5px]"></div>
+                    <div className="bg-gray-200 rounded-lg h-[22.5px]"></div>
+                    <div className="bg-gray-200 rounded-lg h-[22.5px]"></div>
+                    <div className="bg-gray-200 rounded-lg h-[22.5px]"></div>
+                  </div>
+
+                  <div className="flex gap-2.5">
+                    <button className="w-full bg-gray-300 cursor-pointer h-[30px] text-white p-[5px_0] rounded-lg"></button>
+
+                    <button className="w-full bg-gray-300 cursor-pointer h-[30px] text-white p-[5px_0] rounded-lg"></button>
+                  </div>
+                </div>
+              ))
+            ) : getFAQsError ? (
               <p className="text-red-500 text-center text-2xl font-semibold mb-5">
                 {getFAQsError.message || "FAQs ni get qilishda xatolik"}
               </p>

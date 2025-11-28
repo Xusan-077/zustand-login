@@ -20,9 +20,9 @@ export default function Login() {
       onSuccess: (res) => {
         toast.success("tizimga success kirildi");
 
-        setInterval(() => {
-          login(res);
-        }, 1000);
+        // setInterval(() => {
+        login(res);
+        // }, 1000);
       },
       onError: (err) => {
         toast.error(err.message || "tizimga kirishda xatolik");

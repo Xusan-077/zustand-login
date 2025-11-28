@@ -4,7 +4,7 @@ import PrivateHeader from "../components/PrivateHeader";
 
 export default function PrivateLayout() {
   return (
-    <div className="flex">
+    <div className="min-h-screen flex flex-col">
       <aside className="fixed top-0 left-0 h-screen w-72 bg-white shadow-md z-20">
         <LeftComponenta />
       </aside>
