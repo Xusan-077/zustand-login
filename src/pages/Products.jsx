@@ -15,7 +15,9 @@ export default function Products() {
     <section className="mb-auto h-full">
       <div className="container">
         <div className="">
-          <ul className={`${"mt-[65px] grid grid-cols-3 gap-5"}`}>
+          <ul
+            className={`max-[748px]:grid-cols-2 max-[500px]:mt-0 max-[500px]:grid-cols-1 mt-[65px] grid grid-cols-3 gap-5`}
+          >
             {isLoading ? (
               Array.from({ length: 6 }).map((_, index) => (
                 <div

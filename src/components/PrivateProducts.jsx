@@ -42,7 +42,10 @@ export default function PrivateProducts() {
   const { mutate: createFAQ } = useMutation({
     onSuccess: () => {
       setModal(false);
-      toast.success("Add FAQ success");
+      toast.success("Add FAQ success", {
+        className: "max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg",
+        bodyClassName: "text-sm sm:text-base md:text-lg",
+      });
 
       queryClient.invalidateQueries();
     },
@@ -70,7 +73,7 @@ export default function PrivateProducts() {
       <div className="container">
         <div className="">
           {modal && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+            <div className="fixed inset-0 p-[0_20px] z-50 flex items-center justify-center bg-black/50">
               <div className="bg-white w-[400px] rounded-lg p-6 relative">
                 <button
                   onClick={closeModal}

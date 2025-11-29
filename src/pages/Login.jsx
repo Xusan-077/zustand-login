@@ -18,14 +18,18 @@ export default function Login() {
 
     LoginMutate(form, {
       onSuccess: (res) => {
-        toast.success("tizimga success kirildi");
+        toast.success("tizimga success kirildi!", {
+          className: "max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg",
+          bodyClassName: "text-sm sm:text-base md:text-lg",
+        });
 
-        // setInterval(() => {
         login(res);
-        // }, 1000);
       },
       onError: (err) => {
-        toast.error(err.message || "tizimga kirishda xatolik");
+        toast.error(err.message || "tizimga kirishda xatolik", {
+          className: "max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg",
+          bodyClassName: "text-sm sm:text-base md:text-lg",
+        });
       },
     });
   }
@@ -45,9 +49,9 @@ export default function Login() {
   if (isAuth) return <Navigate to="/profile/products" />;
 
   return (
-    <section className="flex justify-between">
-      <div className="bg-gradient-to-br from-[#0a0f2c] to-[#101c48] text-white/70 text-[30px] max-w-[500px] w-full h-screen flex flex-col justify-between p-[50px_0_70px_50px]">
-        <div className="flex justify-between px-[50px] pl-[20px]">
+    <section className="flex justify-between max-[900px]:block gap-5 max-[900px]:p-[0_20px] p-[0_20px_0_0]">
+      <div className="max-[900px]:hidden bg-gradient-to-br from-[#0a0f2c] to-[#101c48] text-white/70 text-[30px] max-w-[500px] w-full h-screen flex flex-col justify-between p-[50px_0_70px_50px]">
+        <div className="flex justify-between px-[50px] pl-5">
           <a href="/" className="text-white">
             Logo
           </a>
@@ -65,12 +69,26 @@ export default function Login() {
         </p>
       </div>
 
-      <div className="w-[80%] flex flex-col justify-center items-center">
-        <h3 className="text-[25px] mb-2.5 font-bold text-black">
-          Create an account
-        </h3>
+      <div className="w-[80%] max-[900px]:w-full max-[900px]:block flex flex-col items-center justify-center max-[900px]:mt-10">
+        <div className="max-[900px]:flex max-[900px]:mb-5 justify-between items-center">
+          <h3 className="text-[25px] max-[425px]:text-5 max-[900px]:mb-0 mb-2.5 font-bold text-black">
+            Create an account
+          </h3>
 
-        <form onSubmit={handleLogin} className="w-[500px] mb-[30px]">
+          <div className="hidden max-[900px]:block">
+            <Link
+              to="/"
+              className="text-gray-500 text-[22px] max-[425px]:text-[18px]"
+            >
+              ← back
+            </Link>
+          </div>
+        </div>
+
+        <form
+          onSubmit={handleLogin}
+          className="max-[900px]:w-full w-[500px] mb-[30px]"
+        >
           <label className="block text-[20px] mb-[5px] pl-2.5 text-gray-500">
             firstname
           </label>
@@ -79,7 +97,7 @@ export default function Login() {
             type="text"
             value={form.username}
             onChange={handleChange}
-            className="border p-3 rounded-lg mb-3 w-full border-gray-300"
+            className="max-[900px]:max-w-[800px] border p-3 rounded-lg mb-3 w-full border-gray-300"
           />
 
           <label className="block text-[20px] mb-[5px] pl-2.5 text-gray-500">
@@ -90,7 +108,7 @@ export default function Login() {
             type="password"
             value={form.password}
             onChange={handleChange}
-            className="border p-3 rounded-lg mb-3 w-full border-gray-300"
+            className="max-[900px]:max-w-[800px] border p-3 rounded-lg mb-3 w-full border-gray-300"
           />
 
           <button

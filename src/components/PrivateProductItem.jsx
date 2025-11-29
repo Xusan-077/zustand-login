@@ -37,7 +37,10 @@ export default function PrivateProductItem({ product, productId }) {
 
     onSuccess: () => {
       setEditModal(false);
-      toast.success("Edit FAQ success");
+      toast.success("Edit FAQ success", {
+        className: "max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg",
+        bodyClassName: "text-sm sm:text-base md:text-lg",
+      });
       queryClient.invalidateQueries();
     },
   });
@@ -48,7 +51,10 @@ export default function PrivateProductItem({ product, productId }) {
     },
 
     onSuccess: () => {
-      toast.success("delete FAQ success");
+      toast.success("delete FAQ success", {
+        className: "max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg",
+        bodyClassName: "text-sm sm:text-base md:text-lg",
+      });
       queryClient.invalidateQueries();
     },
   });
@@ -56,7 +62,7 @@ export default function PrivateProductItem({ product, productId }) {
   return (
     <>
       {editModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+        <div className="fixed inset-0 p-[0_20px] z-50 flex items-center justify-center bg-black/50">
           <div className="bg-white w-[400px] rounded-lg p-6 relative">
             <button
               onClick={() => setEditModal(false)}
@@ -105,7 +111,7 @@ export default function PrivateProductItem({ product, productId }) {
       )}
 
       {deleteModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+        <div className="fixed inset-0 z-50 flex items-center p-[0_20px] justify-center bg-black/50">
           <div className="bg-white w-[400px] rounded-lg p-6 relative">
             <button
               onClick={() => setDeleteModal(false)}
@@ -145,21 +151,38 @@ export default function PrivateProductItem({ product, productId }) {
         </div>
       )}
 
-      <li className="grid gap-5 items-center grid-cols-[50px_1fr_100px] mb-2.5 border-b pb-2.5 border-b-[#ccc]">
-        <span>{productId}</span>
+      <li className="mb-2.5 border-b max-[425px]:pb-5 pb-2.5 border-b-[#ccc]">
+        <div className="grid gap-5 max-[500px]:gap-1 items-center grid-cols-[50px_1fr_100px] max-[500px]:grid-cols-[20px_1fr] max-[800px]:grid-cols-[50px_1fr] max-[425px]:grid-cols-[1fr]">
+          <span>{productId}</span>
 
-        <div className="grid grid-cols-4 items-center">
-          <h2 className="text-gray-500 text-center">{product.question}</h2>
-          <h2 className="text-gray-500 text-center">{product.answer}</h2>
-          <h2 className="text-gray-500 text-center">
-            {format(new Date(product.createdAt), "dd yyyy, HH:mm:ss")}
-          </h2>
-          <h2 className="text-gray-500 text-center">
-            {format(new Date(product.updatedAt), "dd yyyy, HH:mm:ss")}
-          </h2>
+          <div className="grid grid-cols-4 items-center max-[500px]:grid-cols-[1fr_1fr] max-[500px]:gap-3">
+            <h2 className="text-gray-500 text-center">{product.question}</h2>
+            <h2 className="text-gray-500 text-center">{product.answer}</h2>
+            <h2 className="text-gray-500 text-center">
+              {format(new Date(product.createdAt), "dd yyyy, HH:mm:ss")}
+            </h2>
+            <h2 className="text-gray-500 text-center">
+              {format(new Date(product.updatedAt), "dd yyyy, HH:mm:ss")}
+            </h2>
+          </div>
+
+          <div className="flex max-[800px]:hidden gap-2.5">
+            <button
+              onClick={() => setEditModal(true)}
+              className="w-full cursor-pointer bg-yellow-500 text-[14px] text-white p-[5px_0] rounded-lg"
+            >
+              <i className="bi bi-pencil"></i>
+            </button>
+
+            <button
+              onClick={() => setDeleteModal(true)}
+              className="w-full bg-red-500 cursor-pointer text-[14px] text-white p-[5px_0] rounded-lg"
+            >
+              <i className="bi bi-trash3"></i>
+            </button>
+          </div>
         </div>
-
-        <div className="flex gap-2.5">
+        <div className="hidden max-[800px]:flex mt-10 max-[425px]:mt-5 gap-2.5">
           <button
             onClick={() => setEditModal(true)}
             className="w-full cursor-pointer bg-yellow-500 text-[14px] text-white p-[5px_0] rounded-lg"
