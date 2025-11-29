@@ -72,7 +72,7 @@ export default function Login() {
 
   return (
     <section className="flex justify-between max-[900px]:block gap-5 max-[900px]:p-[0_20px] p-[0_20px_0_0]">
-      <div className="max-[F900px]:hidden bg-gradient-to-br from-[#0a0f2c] to-[#101c48] text-white/70 text-[30px] max-w-[500px] w-full h-screen flex flex-col justify-between p-[50px_0_70px_50px]">
+      <div className="max-[900px]:hidden bg-gradient-to-br from-[#0a0f2c] to-[#101c48] text-white/70 text-[30px] max-w-[500px] w-full h-screen flex flex-col justify-between p-[50px_0_70px_50px]">
         <div className="flex justify-between px-[50px] pl-5">
           <a href="/" className="text-white">
             Logo
