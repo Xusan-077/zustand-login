@@ -9,7 +9,6 @@ const useAuthStore = create((set) => ({
       user: userData,
       isAuth: true,
     });
-
     localStorage.setItem("access_token", userData.accessToken);
     localStorage.setItem("refresh_token", userData.refreshToken);
   },
@@ -20,6 +19,7 @@ const useAuthStore = create((set) => ({
     });
     localStorage.removeItem("access_token");
     localStorage.removeItem("refresh_token");
+    localStorage.clear();
   },
   updateUser: (user) => {
     set({

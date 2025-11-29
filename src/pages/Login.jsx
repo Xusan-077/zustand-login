@@ -1,21 +1,32 @@
-import { Link, Navigate } from "react-router-dom";
-import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useMutation } from "@tanstack/react-query";
 import { DUMMY_API } from "../API";
 import useAuthStore from "../store";
 
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
 export default function Login() {
-  const { isAuth, login } = useAuthStore();
+  const navigate = useNavigate();
 
-  const [form, setForm] = useState({
-    username: "emilys",
-    password: "emilyspass",
+  const schema = yup
+    .object({
+      username: yup.string().required(),
+      password: yup.string().min(8).required(),
+    })
+    .required();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
   });
-
-  function handleLogin(e) {
-    e.preventDefault();
-
+  function onSubmit() {
     LoginMutate(form, {
       onSuccess: (res) => {
         toast.success("tizimga success kirildi!", {
@@ -34,6 +45,13 @@ export default function Login() {
     });
   }
 
+  const { isAuth, login } = useAuthStore();
+
+  const [form, setForm] = useState({
+    username: "emilys", //
+    password: "emilyspass", //
+  });
+
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
@@ -46,11 +64,15 @@ export default function Login() {
     },
   });
 
-  if (isAuth) return <Navigate to="/profile/products" />;
+  useEffect(() => {
+    if (isAuth) {
+      navigate("/profile/products", { replace: true });
+    }
+  }, [isAuth, navigate]);
 
   return (
     <section className="flex justify-between max-[900px]:block gap-5 max-[900px]:p-[0_20px] p-[0_20px_0_0]">
-      <div className="max-[900px]:hidden bg-gradient-to-br from-[#0a0f2c] to-[#101c48] text-white/70 text-[30px] max-w-[500px] w-full h-screen flex flex-col justify-between p-[50px_0_70px_50px]">
+      <div className="max-[F900px]:hidden bg-gradient-to-br from-[#0a0f2c] to-[#101c48] text-white/70 text-[30px] max-w-[500px] w-full h-screen flex flex-col justify-between p-[50px_0_70px_50px]">
         <div className="flex justify-between px-[50px] pl-5">
           <a href="/" className="text-white">
             Logo
@@ -86,30 +108,84 @@ export default function Login() {
         </div>
 
         <form
-          onSubmit={handleLogin}
-          className="max-[900px]:w-full w-[500px] mb-[30px]"
+          onSubmit={handleSubmit(onSubmit)}
+          className="max-[900px]:w-full w-[500px] mb-[30px] transition-all"
         >
-          <label className="block text-[20px] mb-[5px] pl-2.5 text-gray-500">
-            firstname
+          <label className="relative mb-5 block">
+            <input
+              name="username"
+              type="text"
+              onChange={handleChange}
+              {...register("username")}
+              placeholder=" "
+              defaultValue={form.username}
+              className="
+        peer/username transition-all max-[900px]:max-w-[800px]
+        focus:outline-1 focus:outline-blue-400
+        border p-[0_0_0_24px] h-[50px] rounded-lg w-full border-gray-300
+        placeholder-transparent
+      "
+            />
+            <span
+              className="
+        absolute left-6 text-gray-500 transition-all duration-300 pointer-events-none
+        top-[14px] text-[18px]
+        peer-placeholder-shown/username:top-[11px]
+        peer-placeholder-shown/username:text-[18px]
+        peer-focus/username:top-[-12px]
+        peer-focus/username:text-[16px]
+        peer-focus/username:bg-white
+        peer-focus/username:px-1
+        peer-[:not(:placeholder-shown)]/username:top-[-12px]
+        peer-[:not(:placeholder-shown)]/username:text-[16px]
+        peer-[:not(:placeholder-shown)]/username:bg-white
+        peer-[:not(:placeholder-shown)]/username:px-1
+      "
+            >
+              Username
+            </span>
+            <p className="text-[14px] text-red-500 pl-2 mt-1">
+              {errors?.username?.message}
+            </p>
           </label>
-          <input
-            name="username"
-            type="text"
-            value={form.username}
-            onChange={handleChange}
-            className="max-[900px]:max-w-[800px] border p-3 rounded-lg mb-3 w-full border-gray-300"
-          />
 
-          <label className="block text-[20px] mb-[5px] pl-2.5 text-gray-500">
-            password
+          <label className="relative mb-5 block">
+            <input
+              name="password"
+              type="password"
+              onChange={handleChange}
+              {...register("password")}
+              defaultValue={form.password}
+              placeholder=" "
+              className="
+        peer/password transition-all max-[900px]:max-w-[800px]
+        focus:outline-1 focus:outline-blue-400
+        border p-[0_0_0_24px] h-[50px] rounded-lg w-full border-gray-300
+        placeholder-transparent
+      "
+            />
+            <span
+              className="
+        absolute left-6 text-gray-500 transition-all duration-300 pointer-events-none
+        top-[14px] text-[18px]
+        peer-placeholder-shown/password:top-[11px]
+        peer-placeholder-shown/password:text-[18px]
+        peer-focus/password:top-[-12px]
+        peer-focus/password:text-[16px]
+        peer-focus/password:bg-white
+        peer-focus/password:px-1
+        peer-[:not(:placeholder-shown)]/password:top-[-12px]
+        peer-[:not(:placeholder-shown)]/password:text-[16px]
+        peer-[:not(:placeholder-shown)]/password:bg-white
+        peer-[:not(:placeholder-shown)]/password:px-1
+      "
+            >
+              Password
+            </span>
+            <p className="text-[14px] text-red-500 pl-2 mt-1">
+              {errors?.password?.message}
+            </p>
           </label>
-          <input
-            name="password"
-            type="password"
-            value={form.password}
-            onChange={handleChange}
-            className="max-[900px]:max-w-[800px] border p-3 rounded-lg mb-3 w-full border-gray-300"
-          />
 
           <button
             type="submit"

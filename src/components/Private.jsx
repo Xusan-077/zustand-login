@@ -33,7 +33,11 @@ export default function Private() {
   }, [userData, updateUser]);
 
   if (!isAuth) {
-    return <Navigate to="/login" />;
+    window.location.href = "/login";
+    return null;
+
+    // return <Navigate to="/login" replace />;
   }
+
   return <Outlet />;
 }

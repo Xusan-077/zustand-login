@@ -16,11 +16,12 @@ export default function Settings() {
     });
 
     setLogout(false);
+
     logout();
 
-    setTimeout(() => {
-      navigate("/login");
-    }, 1000);
+    navigate("/login", {
+      replace: true,
+    });
   }
 
   return (
