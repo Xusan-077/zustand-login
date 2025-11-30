@@ -11,6 +11,16 @@ export default function Products() {
     },
   });
 
+  if (data?.length == 0) {
+    return (
+      <div className="container">
+        <p className="border-gray-500 border p-5 rounded-lg text-red-500 text-center text-2xl font-semibold">
+          Product bo`sh
+        </p>
+      </div>
+    );
+  }
+
   return (
     <section className="mb-auto h-full">
       <div className="container">
@@ -18,37 +28,33 @@ export default function Products() {
           <ul
             className={`max-[748px]:grid-cols-2 max-[500px]:mt-0 max-[500px]:grid-cols-1 mt-[65px] grid grid-cols-3 gap-5`}
           >
-            {isLoading ? (
-              Array.from({ length: 6 }).map((_, index) => (
-                <div
-                  key={index}
-                  className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 p-4 w-full"
-                >
-                  <div className="bg-gray-300 w-full h-[200px] rounded-lg mb-8 flex items-center justify-center overflow-hidden"></div>
-                  <div className="mb-3">
-                    <div className="bg-gray-300 rounded-lg w-35 h-6 mb-1"></div>
-                    <div className="bg-gray-300 rounded-lg w-35 h-6"></div>
+            {isLoading
+              ? Array.from({ length: 6 }).map((_, index) => (
+                  <div
+                    key={index}
+                    className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 p-4 w-full"
+                  >
+                    <div className="bg-gray-300 w-full h-[200px] rounded-lg mb-8 flex items-center justify-center overflow-hidden"></div>
+                    <div className="mb-3">
+                      <div className="bg-gray-300 rounded-lg w-35 h-6 mb-1"></div>
+                      <div className="bg-gray-300 rounded-lg w-35 h-6"></div>
+                    </div>
+                    <div className="">
+                      <div className="bg-gray-300 rounded-lg w-60 h-6 mb-1"></div>
+                      <div className="bg-gray-300 rounded-lg w-60 h-6"></div>
+                    </div>
                   </div>
-                  <div className="">
-                    <div className="bg-gray-300 rounded-lg w-60 h-6 mb-1"></div>
-                    <div className="bg-gray-300 rounded-lg w-60 h-6"></div>
-                  </div>
-                </div>
-              ))
-            ) : data?.length ? (
-              data.map((product, index) => (
-                <ProductItem
-                  productId={index + 1}
-                  product={product}
-                  key={product.id}
-                  {...product}
-                />
-              ))
-            ) : (
-              <p className="border-gray-500 border p-5 rounded-lg text-red-500 text-center text-2xl font-semibold">
-                Product bo`sh
-              </p>
-            )}
+                ))
+              : data?.length
+              ? data.map((product, index) => (
+                  <ProductItem
+                    productId={index + 1}
+                    product={product}
+                    key={product.id}
+                    {...product}
+                  />
+                ))
+              : ""}
           </ul>
         </div>
       </div>

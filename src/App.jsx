@@ -16,18 +16,21 @@ export default function App() {
   return (
     <>
       <Routes>
+        {/* Public layout */}
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="products" element={<Products />} />
         </Route>
 
-        <Route path="/profile" element={<Private />}>
-          <Route element={<PrivateLayout />}>
-            <Route index path="products" element={<PrivateProducts />} />
+        {/* Private layout */}
+        <Route element={<Private />}>
+          <Route path="/profile" element={<PrivateLayout />}>
+            <Route path="products" element={<PrivateProducts />} />
             <Route path="settings" element={<Settings />} />
           </Route>
         </Route>
 
+        {/* Login */}
         <Route path="/login" element={<Login />} />
       </Routes>
 
