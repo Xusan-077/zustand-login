@@ -156,9 +156,9 @@ export default function PrivateProductItem({ product, productId }) {
           <span>{productId}</span>
 
           <div className="grid grid-cols-4 items-center max-[500px]:grid-cols-[1fr_1fr] max-[500px]:gap-3">
-            <h2 className="text-gray-500 text-center">{product.question}</h2>
-            <h2 className="text-gray-500 text-center">{product.answer}</h2>
-            <h2 className="text-gray-500 text-center">
+            <h2 className="text-gray-500 text-center max-w-[300px]">{product.question}</h2>
+            <h2 className="text-gray-500 text-center max-w-[300px]">{product.answer}</h2>
+            <h2 className="text-gray-500 text-center max-w-[300px]">
               {format(new Date(product.createdAt), "dd yyyy, HH:mm:ss")}
             </h2>
             <h2 className="text-gray-500 text-center">

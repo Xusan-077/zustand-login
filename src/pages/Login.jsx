@@ -66,9 +66,9 @@ export default function Login() {
 
   useEffect(() => {
     if (isAuth) {
-      navigate("/profile/products", { replace: true });
+      navigate("/profile/products", { replace: false });
     }
-  }, [isAuth, navigate]);
+  }, [isAuth]);
 
   return (
     <section className="flex justify-between max-[900px]:block gap-5 max-[900px]:p-[0_20px] p-[0_20px_0_0]">

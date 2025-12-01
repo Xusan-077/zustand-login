@@ -27,6 +27,7 @@ const useAuthStore = create((set) => ({
       isAuth: true,
     });
   },
+
   setIsAuth: () => {
     set({
       isAuth: true,

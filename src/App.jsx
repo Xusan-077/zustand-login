@@ -16,13 +16,11 @@ export default function App() {
   return (
     <>
       <Routes>
-        {/* Public layout */}
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="products" element={<Products />} />
         </Route>
 
-        {/* Private layout */}
         <Route element={<Private />}>
           <Route path="/profile" element={<PrivateLayout />}>
             <Route path="products" element={<PrivateProducts />} />
@@ -30,7 +28,6 @@ export default function App() {
           </Route>
         </Route>
 
-        {/* Login */}
         <Route path="/login" element={<Login />} />
       </Routes>
 

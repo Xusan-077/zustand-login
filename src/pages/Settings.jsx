@@ -2,6 +2,7 @@ import { toast } from "react-toastify";
 import { useState } from "react";
 import useAuthStore from "../store";
 import { useNavigate } from "react-router-dom";
+import { queryClient } from "../main";
 
 export default function Settings() {
   const [Logout, setLogout] = useState(false);
@@ -18,6 +19,8 @@ export default function Settings() {
     setLogout(false);
 
     logout();
+
+    queryClient.clear();
 
     navigate("/login", {
       replace: true,
